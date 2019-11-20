@@ -1,11 +1,5 @@
 import {combineReducers} from 'redux'
-
-function number(prevState=0,action){
-  switch(action.type){
-    default:
-      return prevState
-  }
-}
+import user from './user'
 export default combineReducers({
-    number
+    user
 })

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import logo from './logo.png'
-import { Form, Icon, Input, Button, message} from 'antd';
-import axios from 'axios'
+import { Form, Icon, Input, Button} from 'antd';
 import './index.less'
+import {connect } from 'react-redux'
+import {getUserAsync} from '../../redux/action-creators/user'
 
+@connect(null,{getUserAsync})
 @Form.create()
  class Login extends Component {
   //自定义表单的校验
@@ -27,21 +29,16 @@ import './index.less'
     const {form} = this.props
       e.preventDefault();
      form.validateFields((errors, values)=>{
+       const {username,password} = values
           if(!errors){
-            axios.post("http://localhost:5000/api/login",values)
+           this.props.getUserAsync(username,password)
             .then((response)=>{
-              console.log(response)
-              if(response.data.status === 0){
                 this.props.history.push('/')
-              }else{
-                message.error(response.data.msg)
-                form.resetFields(["password"]);
-              }
             })
             .catch((err)=>{
-              message.error("网络故障")
-             form.resetFields(["password"]);
+              form.resetFields(["password"]);
             })
+            
           }
       })
   }
