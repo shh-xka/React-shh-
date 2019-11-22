@@ -4,14 +4,15 @@ import { Form, Icon, Input, Button} from 'antd';
 import './index.less'
 import {connect } from 'react-redux'
 import {getUserAsync} from '../../redux/action-creators/user'
+import {setItem} from '../../utils/storage'
 
-@connect(null,{getUserAsync})
+@connect((state)=>({user:state.user}),{getUserAsync})
 @Form.create()
  class Login extends Component {
   //自定义表单的校验
   validator=(rule, value, callback)=>{
-    console.log(rule)
-    console.log(value)
+    // console.log(rule)
+    // console.log(value)
     const name = rule.field === "username"?"用户名":"密码"
     if(!value){
       callback(`${name}不能为空`)
@@ -33,18 +34,21 @@ import {getUserAsync} from '../../redux/action-creators/user'
           if(!errors){
            this.props.getUserAsync(username,password)
             .then((response)=>{
+              // console.log(response)
+                setItem('user',response)
                 this.props.history.push('/')
             })
             .catch((err)=>{
               form.resetFields(["password"]);
             })
+      
             
           }
       })
   }
  
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login">

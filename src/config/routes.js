@@ -1,8 +1,9 @@
-import Home from '../components/home'
-import Login from '../containers/login'
-import NotMatch from '../components/not-match'
+import Home from "../components/home";
+import Login from "../containers/login";
+import NotMatch from "../components/not-match";
 
-export default [{
+export default [
+  {
     path: "/",
     component: Home,
     exact: true
@@ -14,7 +15,5 @@ export default [{
   },
   {
     component: NotMatch
-
   }
-
-]
+];

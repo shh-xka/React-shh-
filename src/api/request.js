@@ -1,5 +1,6 @@
 import axios from 'axios'
 import codeMessage from '../config/code-message'
+import store from '../redux/store'
 import {
   message
 } from 'antd'
@@ -13,7 +14,7 @@ const axiosInstance = axios.create({
 
   }
 })
-let token = ''
+//发生在请求之前
 axiosInstance.interceptors.request.use(
   (config) => {
     if (config.method === 'post') {
@@ -23,6 +24,14 @@ axiosInstance.interceptors.request.use(
         return prev + `&${key}=${vaule}`
       }, '').substring(1)
     }
+
+    const {
+      user: {
+        token
+      }
+    } = store.getState()
+    
+
     if (token) {
       config.headers.authorization = 'Bearer ' + token;
     }
@@ -37,13 +46,11 @@ axiosInstance.interceptors.response.use(
     } else {
       // alert(response.data.msg)
       message.error(response.data.msg)
-      return Promise.reject(response.data.msg)
     }
   },
   (error) => {
 
     let errorMessage = ''
-
     if (error.response) {
       errorMessage = codeMessage[error.response.status] || '未知错误'
     } else {

@@ -12,10 +12,11 @@ const getUser = (user) => ({
 export const getUserAsync = (username, password) => {
   return (dispatch) => {
     return reqLogin(username, password)
-        .then((response) => {
-          const action = getUser(response)
-          dispatch(action)
-        })
+      .then((response) => {
+        const action = getUser(response)
+        dispatch(action)
+        return response
+      })
   }
 
 }
