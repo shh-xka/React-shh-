@@ -45,14 +45,16 @@ const { SubMenu } = Menu;
    }
 
    findMenus=(menus,pathname)=>{
-      menus.forEach((menu)=>{
-        if(menu.children){
-          const cmenu = menu.children.find((cmenu)=>cmenu.path === pathname)
-          if(cmenu){
-            return menu.path
-          }
+     for(var index = 0;index<menus.length;index++){
+      const menu = menus[index]
+      if(menu.children){
+        //获取能够得到路径的孙子元素
+        const cmenu = menu.children.find((cmenu)=>cmenu.path === pathname)
+        if(cmenu){
+          return menu.path
         }
-      })
+      }
+    }
    }
 
   componentDidMount(){
