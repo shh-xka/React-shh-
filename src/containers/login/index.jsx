@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import logo from './logo.png'
+import logo from '../../assets/logo.png'
 import { Form, Icon, Input, Button} from 'antd';
 import './index.less'
 import {connect } from 'react-redux'
 import {getUserAsync} from '../../redux/action-creators/user'
 import {setItem} from '../../utils/storage'
+import {withCheckLogin} from '../with-check-login/withchecklogin'
 
+@withCheckLogin
 @connect((state)=>({user:state.user}),{getUserAsync})
 @Form.create()
  class Login extends Component {

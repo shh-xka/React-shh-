@@ -4,7 +4,13 @@ import store from '../redux/store'
 import {
   message
 } from 'antd'
-
+import {
+  removeUser
+} from '../redux/action-creators/user'
+import {
+  removeItem
+} from '../utils/storage'
+import history from '../utils/history'
 
 
 const axiosInstance = axios.create({
@@ -30,7 +36,7 @@ axiosInstance.interceptors.request.use(
         token
       }
     } = store.getState()
-    
+
 
     if (token) {
       config.headers.authorization = 'Bearer ' + token;
@@ -53,6 +59,12 @@ axiosInstance.interceptors.response.use(
     let errorMessage = ''
     if (error.response) {
       errorMessage = codeMessage[error.response.status] || '未知错误'
+      if (error.response.status === 401) {
+        removeItem('user');
+        store.dispatch(removeUser())
+        history.push('/login')
+
+      }
     } else {
       if (error.message.indexOf('Network Error') !== -1) {
         errorMessage = '请检查网络连接';

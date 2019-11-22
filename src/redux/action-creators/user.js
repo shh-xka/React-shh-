@@ -1,12 +1,17 @@
 import reqLogin from '../../api/index'
 import {
-  GETUSERMESSAGE
+  GETUSERMESSAGE,
+  REMOVEUSERMESSAGE
 } from '../action-types'
 
 const getUser = (user) => ({
   type: GETUSERMESSAGE,
   data: user
 
+})
+
+export const removeUser = ()=>({
+  type: REMOVEUSERMESSAGE
 })
 
 export const getUserAsync = (username, password) => {

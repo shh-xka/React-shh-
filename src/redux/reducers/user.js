@@ -1,5 +1,6 @@
 import {
-  GETUSERMESSAGE
+  GETUSERMESSAGE,
+  REMOVEUSERMESSAGE
 } from '../action-types'
 import {
   getItem
@@ -11,6 +12,8 @@ export default function user(prevState = values, action) {
   switch (action.type) {
     case GETUSERMESSAGE:
       return action.data;
+    case REMOVEUSERMESSAGE:
+      return {}
     default:
       return prevState
   }
