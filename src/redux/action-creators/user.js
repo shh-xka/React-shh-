@@ -1,4 +1,4 @@
-import reqLogin from '../../api/index'
+import {reqLogin} from '../../api/index'
 import {
   GETUSERMESSAGE,
   REMOVEUSERMESSAGE

@@ -3,14 +3,16 @@ import logo from '../../../assets/logo.png'
 import './index.less'
 import menus from '../../../config/menus'
 import { Menu, Icon } from 'antd';
+import PropTypes from 'prop-types';
 import {Link,withRouter} from 'react-router-dom'
 const { SubMenu } = Menu;
 
 @withRouter
  class LayoutSider extends Component {
-  state={
-    menus:[]
-  }
+   static propTypes={
+     isHidden:PropTypes.bool.isRequired
+   }
+ 
 
   creatMenus=(menus)=>{
     return  menus.map((menu)=>{
@@ -57,25 +59,21 @@ const { SubMenu } = Menu;
     }
    }
 
-  componentDidMount(){
-    this.setState({
-      menus:this.creatMenus(menus)
-    })
-  }
-
+ 
 
 
   render() {
     const {pathname} = this.props.location
      const pathName = this.findMenus(menus,pathname)
+     const {isHidden} = this.props
    return (
       <div>
       <div className="layout-logo" >
             <img src={logo} alt="logo"/>
-            <h1>尚硅谷(shh)</h1>
+            <h1 style={{display:isHidden ?"block":"none"}}>尚硅谷(shh)</h1>
      </div>
       <Menu theme="dark" defaultSelectedKeys={[pathname]} defaultOpenKeys={[pathName]} mode="inline">
-           {this.state.menus}
+           {this.creatMenus(menus)}
      </Menu>
     </div>
     )
