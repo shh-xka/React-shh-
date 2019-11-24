@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component,Suspense } from 'react'
 import {authRoutes,noAuthRoutes} from './config/routes'
 import {Route ,Switch } from 'react-router-dom'
 import { Router} from 'react-router'
 import history from './utils/history.js'
+import { Spin } from 'antd';
 // import {createBrowserHistory} from 'history'
 import BaseLayout from './components/basic-layout'
 import './index.less'
@@ -12,6 +13,7 @@ import './index.less'
   render() {
 
     return (
+      <Suspense fallback={ <Spin size="small"  className="spin-c"/>}>
       <Router history={history}>
         <Switch>
           {
@@ -30,6 +32,7 @@ import './index.less'
           </BaseLayout>
         </Switch>
       </Router>
+      </Suspense>
     )
   }
 }

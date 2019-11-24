@@ -1,19 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
 import logo from '../../../assets/logo.png'
 import './index.less'
 import menus from '../../../config/menus'
 import { Menu, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import {Link,withRouter} from 'react-router-dom'
+import {  withTranslation } from 'react-i18next';
 const { SubMenu } = Menu;
 
+@withTranslation()
 @withRouter
  class LayoutSider extends Component {
    static propTypes={
      isHidden:PropTypes.bool.isRequired
    }
  
-
   creatMenus=(menus)=>{
     return  menus.map((menu)=>{
       if(menu.children){
@@ -23,7 +24,7 @@ const { SubMenu } = Menu;
             <span>
               <Icon type={menu.icon} />
               
-              <span>{menu.title}</span>
+              <span>{this.props.t("layout.leftNav."+menu.title)}</span>
             </span>
           }
         >
@@ -41,7 +42,7 @@ const { SubMenu } = Menu;
     return <Menu.Item key={menu.path}>
       <Link to={menu.path}>
      <Icon type={menu.icon} />
-     <span>{menu.title}</span>
+     <span>{this.props.t("layout.leftNav."+menu.title)}</span>
      </Link>
     </Menu.Item>
    }
@@ -65,12 +66,13 @@ const { SubMenu } = Menu;
   render() {
     const {pathname} = this.props.location
      const pathName = this.findMenus(menus,pathname)
-     const {isHidden} = this.props
+     const {isHidden,t} = this.props
    return (
+     
       <div>
       <div className="layout-logo" >
             <img src={logo} alt="logo"/>
-            <h1 style={{display:isHidden ?"block":"none"}}>尚硅谷(shh)</h1>
+   <h1 style={{display:isHidden ?"block":"none"}}>{t("layout.leftNav.title")}</h1>
      </div>
       <Menu theme="dark" defaultSelectedKeys={[pathname]} defaultOpenKeys={[pathName]} mode="inline">
            {this.creatMenus(menus)}
