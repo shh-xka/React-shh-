@@ -25,20 +25,6 @@ import {getCategoryAsncy} from '../../redux/action-creators/category'
   
   ];
   
-  data=[
-    {
-      "_id": "5c2ed631f352726338607046",
-      "name": "分类001",
-    },
-    {
-      "_id": "5c2ed647f352726338607047",
-      "name": "分类2",
-    },
-    {
-      "_id": "5c2ed64cf352726338607048",
-      "name": "1分类3",
-    }
-  ]
   render() {
     const {category} = this.props
     return (

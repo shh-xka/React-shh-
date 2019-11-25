@@ -23,7 +23,6 @@ const { SubMenu } = Menu;
           title={
             <span>
               <Icon type={menu.icon} />
-              
               <span>{this.props.t("layout.leftNav."+menu.title)}</span>
             </span>
           }
