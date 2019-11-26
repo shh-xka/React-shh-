@@ -63,7 +63,9 @@ const { SubMenu } = Menu;
 
 
   render() {
-    const {pathname} = this.props.location
+   let {pathname} = this.props.location
+    // pathname = pathname.startsWith("/product") ? "/product" : pathname;
+    pathname = pathname.startsWith("/product")?"/product":pathname;
      const pathName = this.findMenus(menus,pathname)
      const {isHidden,t} = this.props
    return (

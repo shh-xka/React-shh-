@@ -3,7 +3,7 @@ import React, { Component } from 'react'
   render() {
     return (
       <div>
-        home....
+        欢迎使用硅谷后台管理系统~~
       </div>
     )
   }
